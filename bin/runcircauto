@@ -1,0 +1,9 @@
+#!/bin/sh
+
+CONTAINER_ID=`docker ps -a -q -f name="^circulatory-autogen$"`
+
+if [ "$CONTAINER_ID" == "" ]; then
+    docker run -it -e DISPLAY=${IP_ADDRESS}:0 -v $HOME:/root/Data --platform=linux/amd64 --name circulatory-autogen circulatory-autogen zsh
+else
+    docker start -i $CONTAINER_ID
+fi
